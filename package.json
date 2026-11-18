@@ -1,17 +1,20 @@
 {
-  "name": "ieadpg-amalia",
+  "name": "ieadpg-org",
   "version": "1.0.0",
-  "description": "Site Institucional IEADPG Jardim Amália (Astro + Cloudflare Workers Assets + Video Streaming)",
+  "description": "Website institucional e CMS da IEADPG Jardim Amália powered by Astro & EmDash CMS",
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "typecheck": "tsc --noEmit",
-    "deploy": "astro build && wrangler deploy"
+    "astro": "astro",
+    "typecheck": "astro check",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^12.2.0",
     "astro": "^5.3.0"
   },

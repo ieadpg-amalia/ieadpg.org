@@ -1,117 +1,124 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+
+const allCultos = await getCollection('cultos');
 ---
 
-<Layout>
-  <main class="container">
-    <header class="hero">
-      <p class="eyebrow">Igreja Evangélica Assembleia de Deus</p>
-      <h1>IEADPG · Jardim Amália</h1>
-      <p class="description">
-        Somos uma família vivendo a unidade em amor — e estamos construindo a nossa nova casa no Jardim Amália.
-        O prédio que aparece nos vídeos deste site é o projeto: o nosso sonho tomando forma. Aqui você é acolhido,
-        edificado e preparado para viver o seu propósito em Deus.
-      </p>
-    </header>
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b0b" />
+    <meta name="color-scheme" content="dark" />
 
-    <section class="info-section">
-      <div class="card">
-        <h3>Cultos</h3>
-        <p><strong>Domingo 19h:</strong> Celebração</p>
-        <p><strong>Quarta 20h:</strong> Alinhamento</p>
-      </div>
+    <title>IEADPG Jardim Amália · Igreja Assembleia de Deus, Ponta Grossa</title>
+    <meta
+      name="description"
+      content="Assembleia de Deus no Jardim Amália, Ponta Grossa: cultos domingo 19h e quarta 20h. Conheça a família e o projeto da nova casa."
+    />
+    <link rel="canonical" href="https://ieadpg.org/" />
 
-      <div class="card">
-        <h3>Endereço</h3>
-        <p>Rua Paulina Oliveira Gomes, 1071 — Jardim Amália, Ponta Grossa/PR</p>
-        <a class="link" href="https://maps.app.goo.gl/nKgD83xmGetsyDzKA" target="_blank" rel="noopener noreferrer">Como chegar no Google Maps</a>
-      </div>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" />
 
-      <div class="card">
-        <h3>Contato</h3>
-        <p>Fale diretamente com nossa liderança pelo WhatsApp ou acesse o Portal do Membro.</p>
-        <div class="actions">
-          <a class="btn primary" href="https://wa.me/5542999384069" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
-          <a class="btn secondary" href="https://app.ieadpg.org" target="_blank" rel="noopener noreferrer">Portal do Membro</a>
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="IEADPG Jardim Amália" />
+    <meta property="og:title" content="IEADPG Jardim Amália · Igreja Assembleia de Deus, Ponta Grossa" />
+    <meta
+      property="og:description"
+      content="Assembleia de Deus no Jardim Amália, Ponta Grossa: cultos domingo 19h e quarta 20h. Conheça a família e o projeto da nova casa."
+    />
+    <meta property="og:url" content="https://ieadpg.org/" />
+    <meta property="og:image" content="https://media.ieadpg.org/opengraph-image.jpg" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema.org Church / Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://ieadpg.org/#website",
+            "name": "IEADPG Jardim Amália",
+            "url": "https://ieadpg.org",
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": ["Church", "Organization"],
+            "@id": "https://ieadpg.org/#igreja",
+            "name": "IEADPG Jardim Amália",
+            "alternateName": "Igreja Evangélica Assembleia de Deus — Jardim Amália",
+            "url": "https://ieadpg.org",
+            "telephone": "+55 42 99938-4069",
+            "email": "contato@ieadpg.org",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rua Paulina Oliveira Gomes, 1071",
+              "addressLocality": "Ponta Grossa",
+              "addressRegion": "PR",
+              "addressCountry": "BR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": -25.1368187,
+              "longitude": -50.137646
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-black text-[#f4efe6] antialiased">
+    <main class="min-h-screen flex flex-col justify-between p-6 max-w-4xl mx-auto">
+      <header class="py-8">
+        <p class="text-xs uppercase tracking-widest text-amber-500 font-semibold">Igreja Evangélica Assembleia de Deus</p>
+        <h1 class="text-4xl md:text-6xl font-serif mt-2">IEADPG · Jardim Amália</h1>
+      </header>
+
+      <section class="space-y-6 my-auto">
+        <p class="text-lg md:text-xl leading-relaxed text-neutral-300">
+          Somos uma família vivendo a unidade em amor — e estamos construindo a nossa nova casa no Jardim Amália.
+          Aqui você é acolhido, edificado e preparado para viver o seu propósito em Deus.
+        </p>
+
+        <div class="border-l-2 border-amber-500 pl-4 py-2 space-y-1">
+          <p><strong>Cultos:</strong> Domingo 19h · Celebração — Quarta 20h · Alinhamento</p>
+          <p><strong>Endereço:</strong> Rua Paulina Oliveira Gomes, 1071 — Jardim Amália, Ponta Grossa/PR</p>
         </div>
-      </div>
-    </section>
-  </main>
-</Layout>
 
-<style>
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 64px 24px;
-  }
-  .hero {
-    margin-bottom: 48px;
-  }
-  .eyebrow {
-    color: #c59b27;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  h1 {
-    font-family: var(--font-cormorant);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1.1;
-    margin: 0 0 16px;
-    color: #f4efe6;
-  }
-  .description {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: #c9c3b8;
-  }
-  .info-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-top: 32px;
-  }
-  .card {
-    background: #141414;
-    border: 1px solid #282828;
-    border-radius: 12px;
-    padding: 24px;
-  }
-  .card h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-    color: #c59b27;
-  }
-  .link {
-    color: #e5b945;
-    text-decoration: underline;
-    display: inline-block;
-    margin-top: 8px;
-  }
-  .actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-  .btn {
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 500;
-    text-decoration: none;
-    font-size: 0.95rem;
-  }
-  .btn.primary {
-    background: #c59b27;
-    color: #0b0b0b;
-  }
-  .btn.secondary {
-    background: #222;
-    color: #f4efe6;
-    border: 1px solid #444;
-  }
-</style>
+        <p class="italic text-neutral-400">
+          “Acima de tudo, revistam-se do amor” — Colossenses 3:14
+        </p>
+
+        <div class="flex flex-wrap gap-4 pt-4">
+          <a
+            href="https://wa.me/5542999384069"
+            class="px-6 py-3 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-medium transition shadow-lg"
+          >
+            Falar no WhatsApp
+          </a>
+          <a
+            href="https://maps.app.goo.gl/nKgD83xmGetsyDzKA"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 rounded-full border border-neutral-700 hover:border-neutral-500 text-neutral-300 transition"
+          >
+            Como chegar
+          </a>
+        </div>
+      </section>
+
+      <footer class="py-8 border-t border-neutral-900 text-xs text-neutral-500 flex justify-between items-center">
+        <p>&copy; {new Date().getFullYear()} IEADPG Jardim Amália. Todos os direitos reservados.</p>
+        <a href="/admin" class="hover:text-neutral-400">Área Administrativa</a>
+      </footer>
+    </main>
+  </body>
+</html>
