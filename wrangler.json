@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ieadpg-amalia",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-18",
+  "routes": [
+    {
+      "pattern": "amalia.ieadpg.org/*",
+      "zone_name": "ieadpg.org"
+    },
+    {
+      "pattern": "ieadpg.com/*",
+      "zone_name": "ieadpg.com"
+    },
+    {
+      "pattern": "www.ieadpg.com/*",
+      "zone_name": "ieadpg.com"
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

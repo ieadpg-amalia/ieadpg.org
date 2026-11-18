@@ -1,0 +1,23 @@
+{
+  "name": "ieadpg-amalia",
+  "version": "1.0.0",
+  "description": "Site Institucional IEADPG Jardim Amália (Astro + Cloudflare Workers Assets + Video Streaming)",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "tsc --noEmit",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.2.0",
+    "astro": "^5.3.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.111.0"
+  }
+}
