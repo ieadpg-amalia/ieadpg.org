@@ -1,10 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "ieadpg-org",
+  "name": "ieadpg-amalia",
   "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2026-10-27",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "ieadpg.org/*",
+      "zone_name": "ieadpg.org"
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"
