@@ -4,42 +4,14 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  build-and-test:
-    name: Build & Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Type check
-        run: npm run typecheck
-        continue-on-error: true
-
-      - name: Build Astro site
-        run: npm run build
-
   deploy:
-    name: Deploy to Cloudflare
-    needs: build-and-test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    name: Deploy to Cloudflare Workers
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -49,13 +21,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Astro site
-        run: npm run build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3

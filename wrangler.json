@@ -1,19 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ieadpg-amalia",
-  "main": "./dist/_worker.js/index.js",
-  "compatibility_date": "2026-10-27",
-  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/worker.js",
+  "compatibility_date": "2026-08-18",
   "assets": {
-    "directory": "./dist",
+    "directory": "public",
     "binding": "ASSETS"
-  },
-  "vars": {
-    "SITE_URL": "https://ieadpg.org",
-    "API_URL": "https://app.ieadpg.org",
-    "MEDIA_URL": "https://media.ieadpg.org"
-  },
-  "observability": {
-    "enabled": true
   }
 }

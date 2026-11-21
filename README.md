@@ -1,58 +1,68 @@
-# IEADPG.org · Portal Institucional & CMS
+# ieadpg.org — Website Oficial da IEADPG Jardim Amália
 
-Repositório público do website institucional e CMS da **IEADPG Jardim Amália** (Igreja Evangélica Assembleia de Deus em Ponta Grossa/PR).
+Repositório público oficial do portal institucional da **Igreja Evangélica Assembleia de Deus — Jardim Amália**, em Ponta Grossa/PR.
 
-- **Stack:** [Astro](https://astro.build/) (v5 Hybrid) + [EmDash CMS](https://emdash.dev) + [Cloudflare Workers / Assets](https://developers.cloudflare.com/workers/)
-- **Hospedagem & Edge:** Cloudflare Global Network
-- **Repositório GitHub:** `ieadpg-amalia/ieadpg.org` (Público)
+Operando sob a infraestrutura oficial da Cloudflare via **Cloudflare Workers Assets** e **Edge Streaming**.
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🏛️ Arquitetura e Recursos
+
+- **Experiência Visual Interativa (Scroll-World):**
+  - Motor de scrub de alta performance (`scrub-engine.js`).
+  - Navegação suave e renderização com suporte a telas retina e dispositivos móveis (coarse pointer / 9:16 portrait).
+  - Stills WebP ultra-otimizados e vídeos MP4 codificados especificamente para scrubbing.
+- **Backend de Borda (Worker):**
+  - Script em `src/worker.js` com suporte completo a **HTTP 206 Partial Content** (header `Range`) para fatiamento de mídia.
+  - Entrega ultra-rápida de ativos estáticos via `env.ASSETS` (Cloudflare Workers Assets).
+- **Cabeçalhos de Segurança e Cache:**
+  - Configurados via `public/_headers` com cache imutável para mídias pesadas (`max-age=31536000, immutable`), segurança contra XSS (`nosniff`, `DENY`) e revalidação instantânea de HTML.
+
+---
+
+## 📁 Estrutura de Diretórios
 
 ```text
-ieadpg.org/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # Pipeline CI/CD GitHub Actions -> Cloudflare
-├── public/                     # Favicons, robots.txt, assets estáticos locais
+│       └── deploy.yml          # Pipeline CI/CD GitHub Actions
+├── public/                     # Diretório de ativos estáticos servidos na borda
+│   ├── _astro/                 # Estilos CSS e fontes WOFF/WOFF2
+│   ├── _headers                # Regras de cache e segurança da Cloudflare
+│   ├── scroll-world/           # Clipes MP4, stills WebP e motor scrub-engine.js
+│   ├── favicon.ico
+│   ├── flame.png / flame.webp
+│   ├── icon.png / apple-icon.png
+│   ├── ieadpg-logo.png / ieadpg-logo.webp
+│   ├── index.html              # Documento HTML principal
+│   └── opengraph-image.jpg
 ├── src/
-│   ├── components/             # Componentes Astro reutilizáveis
-│   ├── content/                # Content Collections do Astro / Schemas do CMS
-│   │   └── config.ts           # Definição de schemas: notícias, eventos, cultos, etc.
-│   ├── layouts/                # Layouts base HTML e SEO
-│   └── pages/                  # Rotas e páginas do site
-├── astro.config.mjs            # Configuração Astro com adaptador Cloudflare
-├── tsconfig.json               # Configuração TypeScript estrita
-├── wrangler.json               # Configuração de deploy do Cloudflare Workers / Assets
-└── ARCHITECTURE.md             # Documento de Arquitetura, Diagnóstico e Governança
+│   └── worker.js               # Handler do Worker com suporte a HTTP Range
+├── package.json
+└── wrangler.json               # Contrato de configuração do Cloudflare Workers
 ```
-
----
-
-## 🔒 Diretrizes de Segurança (Repositório Público)
-
-1. **Zero Secrets:** Nunca commite credenciais, senhas, tokens ou arquivos `.env` / `.dev.vars`.
-2. **Secrets no CI/CD:** Apenas GitHub Secrets (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`) são injetados durante o workflow.
-3. **Mídias Pesadas:** Mídias volumosas e vídeos MP4 devem ser hospedados no Cloudflare R2 (`https://media.ieadpg.org`).
 
 ---
 
 ## 🚀 Desenvolvimento Local
 
+Para executar o ambiente localmente:
+
 ```bash
 # Instalar dependências
 npm install
 
-# Iniciar servidor de desenvolvimento
+# Iniciar servidor local com Wrangler
 npm run dev
-
-# Checagem de tipos
-npm run typecheck
-
-# Build de produção
-npm run build
-
-# Deploy manual (necessita login no wrangler)
-npm run deploy
 ```
+
+Acesse `http://localhost:8787` no navegador.
+
+---
+
+## 🚢 CI/CD & Deploy Contínuo
+
+Toda alteração integrada na branch `main` dispara automaticamente o deploy via GitHub Actions para a conta oficial da IEADPG na Cloudflare:
+
+- **Domínio de Produção:** [https://ieadpg.org](https://ieadpg.org)
+- **Redirecionamentos Canônicos:** `amalia.ieadpg.org` e `www.ieadpg.org` ➔ `https://ieadpg.org/`
